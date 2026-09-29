@@ -22,7 +22,29 @@ const studentMembers=[
 ];
 const nav=[['/','Home'],['/about','The Chapter'],['/team','People'],['/activities','What We Do'],['/events','Events'],['/gallery','Gallery'],['/membership','Join Us'],['/contact','Contact']];
 
-function Meta({title}){useEffect(()=>{document.title=title+' · BEC-IIF';window.scrollTo(0,0)},[title]);return null}
+const SITE_URL='https://bec-iif-website-ea94e9wa4-shreyas-rathods-projects.vercel.app';
+const SEO={
+ Home:{description:'BEC-IIF is the Indian Institute of Foundrymen student chapter at Basaveshwar Engineering College, Bagalkot, connecting Mechanical Engineering students with foundry, casting, manufacturing and industry.'},
+ 'The Chapter':{description:'Learn about BEC-IIF, the Institute of Indian Foundrymen student chapter at Basaveshwar Engineering College, Bagalkot, and its purpose, history and activities.'},
+ People:{description:'Meet the BEC-IIF chapter leadership, executive committee and student members at Basaveshwar Engineering College, Bagalkot.'},
+ 'What We Do':{description:'Explore BEC-IIF technical sessions, workshops, industry visits, student projects and competitions focused on foundry and manufacturing engineering.'},
+ Events:{description:'See conducted and upcoming BEC-IIF student chapter events, workshops, quizzes and industry activities at Basaveshwar Engineering College, Bagalkot.'},
+ Gallery:{description:'Browse the BEC-IIF photo and video gallery featuring student activities, events, people and engineering moments at Basaveshwar Engineering College.'},
+ 'Join Us':{description:'Learn how students can participate in BEC-IIF, the Institute of Indian Foundrymen student chapter at Basaveshwar Engineering College, Bagalkot.'},
+ Contact:{description:'Contact the BEC-IIF student chapter at Basaveshwar Engineering College, Bagalkot for membership, events, activities and collaboration.'}
+};
+function setMeta(name,content){let el=document.head.querySelector('meta[name="'+name+'"]');if(!el){el=document.createElement('meta');el.setAttribute('name',name);document.head.appendChild(el)}el.setAttribute('content',content)}
+function setProperty(property,content){let el=document.head.querySelector('meta[property="'+property+'"]');if(!el){el=document.createElement('meta');el.setAttribute('property',property);document.head.appendChild(el)}el.setAttribute('content',content)}
+function Meta({title}){useEffect(()=>{const description=SEO[title]?.description||SEO.Home.description;const path=window.location.pathname;const canonical=SITE_URL+(path==='/'?'':path);document.title=title+' · BEC-IIF';setMeta('description',description);setMeta('robots','index, follow');setMeta('theme-color','#101010');setProperty('og:title',title+' · BEC-IIF');setProperty('og:description',description);setProperty('og:type','website');setProperty('og:url',canonical);setProperty('og:site_name','BEC-IIF');setProperty('twitter:card','summary');setProperty('twitter:title',title+' · BEC-IIF');setProperty('twitter:description',description);let link=document.head.querySelector('link[rel="canonical"]');if(!link){link=document.createElement('link');link.rel='canonical';document.head.appendChild(link)}link.href=canonical;let schema=document.head.querySelector('#bec-iif-schema');if(!schema){schema=document.createElement('script');schema.id='bec-iif-schema';schema.type='application/ld+json';document.head.appendChild(schema)}schema.textContent=JSON.stringify({
+ '@context':'https://schema.org',
+ '@type':'EducationalOrganization',
+ name:'BEC-IIF Student Chapter',
+ alternateName:'Indian Institute of Foundrymen - BEC Student Chapter',
+ url:SITE_URL,
+ description:description,
+ parentOrganization:{'@type':'CollegeOrUniversity',name:'Basaveshwar Engineering College',url:'https://www.becbgk.edu/'},
+ address:{'@type':'PostalAddress',addressLocality:'Bagalkot',addressRegion:'Karnataka',addressCountry:'IN'}
+});window.scrollTo(0,0)},[title]);return null}
 function Header(){const[open,setOpen]=useState(false);return <header className="header"><div className="topline"><span>BASAVESHWAR ENGINEERING COLLEGE</span><span>VIDYAGIRI · BAGALKOT · KARNATAKA</span></div><div className="header-main"><Link to="/" className="brand" onClick={()=>setOpen(false)}><span className="brand-logo"><img src="/assets/iif-logo.png" alt="The Institute of Indian Foundrymen"/></span><span><b>BEC-IIF</b><small>INDIAN INSTITUTE OF FOUNDRYMEN</small></span></Link><button className="menu" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button><nav className={open?'nav open':'nav'}>{nav.map(([to,l])=><NavLink key={to} to={to} end={to==='/' } onClick={()=>setOpen(false)}>{l}</NavLink>)}</nav></div></header>}
 
 function Page({eyebrow,title,intro,children}){return <><div className="page-head"><div className="wrap"><div className="page-index">{eyebrow}</div><h1>{title}</h1><p>{intro}</p></div></div>{children}</>}
