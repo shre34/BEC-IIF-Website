@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+.vscode/
+check.png
+check2.png
