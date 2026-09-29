@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bec-iif.vercel.app/sitemap.xml
+Sitemap: https://bec-iif-website-ea94e9wa4-shreyas-rathods-projects.vercel.app/sitemap.xml
