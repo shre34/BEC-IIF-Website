@@ -22,7 +22,7 @@ const studentMembers=[
 ];
 const nav=[['/','Home'],['/about','The Chapter'],['/team','People'],['/activities','What We Do'],['/events','Events'],['/gallery','Gallery'],['/membership','Join Us'],['/contact','Contact']];
 
-const SITE_URL='https://bec-iif-website.onrender.com';
+const SITE_URL='https://bec-iif-website.vercel.app';
 const SEO={
  Home:{description:'BEC-IIF is the Indian Institute of Foundrymen student chapter at Basaveshwar Engineering College, Bagalkot, connecting Mechanical Engineering students with foundry, casting, manufacturing and industry.'},
  'The Chapter':{description:'Learn about BEC-IIF, the Institute of Indian Foundrymen student chapter at Basaveshwar Engineering College, Bagalkot, and its purpose, history and activities.'},
